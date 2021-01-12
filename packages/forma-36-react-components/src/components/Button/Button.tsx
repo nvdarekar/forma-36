@@ -99,48 +99,46 @@ export const Button = ({
       type={type}
       {...otherProps}
     >
-      <TabFocusTrap className={styles['Button__inner-wrapper']}>
-        {icon && !loading && (
-          <Icon
-            className={styles.Button__icon}
-            size={size === 'small' ? 'tiny' : 'small'}
-            icon={icon}
-            color={iconColor}
-          />
-        )}
-        <CSSTransition
-          in={loading}
-          timeout={1000}
-          classNames={{
-            enter: styles['Button--spinner--enter'],
-            enterActive: styles['Button--spinner-active'],
-            exit: styles['Button--spinner--exit'],
-            exitActive: styles['Button--spinner-exit-active'],
-          }}
-          mountOnEnter
-          unmountOnExit
-        >
-          <Spinner
-            className={styles.Button__spinner}
-            customSize={18}
-            color={
-              buttonType === 'muted' ||
-              buttonType === 'warning' ||
-              buttonType === 'naked'
-                ? 'default'
-                : 'white'
-            }
-          />
-        </CSSTransition>
-        {children && <span className={styles.Button__label}>{children}</span>}
-        {indicateDropdown && (
-          <Icon
-            className={styles['Button__dropdown-icon']}
-            icon="ChevronDown"
-            color={iconColor}
-          />
-        )}
-      </TabFocusTrap>
+      {icon && !loading && (
+        <Icon
+          className={styles.Button__icon}
+          size={size === 'small' ? 'tiny' : 'small'}
+          icon={icon}
+          color={iconColor}
+        />
+      )}
+      <CSSTransition
+        in={loading}
+        timeout={1000}
+        classNames={{
+          enter: styles['Button--spinner--enter'],
+          enterActive: styles['Button--spinner-active'],
+          exit: styles['Button--spinner--exit'],
+          exitActive: styles['Button--spinner-exit-active'],
+        }}
+        mountOnEnter
+        unmountOnExit
+      >
+        <Spinner
+          className={styles.Button__spinner}
+          customSize={18}
+          color={
+            buttonType === 'muted' ||
+            buttonType === 'warning' ||
+            buttonType === 'naked'
+              ? 'default'
+              : 'white'
+          }
+        />
+      </CSSTransition>
+      {children}
+      {indicateDropdown && (
+        <Icon
+          className={styles['Button__dropdown-icon']}
+          icon="ChevronDown"
+          color={iconColor}
+        />
+      )}
     </Element>
   );
 };
