@@ -34,6 +34,8 @@ export interface ButtonProps {
   type?: 'button' | 'submit' | 'reset';
   size?: 'small' | 'medium' | 'large';
   href?: string;
+  rel?: string;
+  target?: string;
   style?: CSSProperties;
   className?: string;
   children?: React.ReactNode;
@@ -46,6 +48,8 @@ export const Button = ({
   className,
   disabled = false,
   href,
+  rel,
+  target,
   icon,
   indicateDropdown = false,
   isActive,
@@ -78,6 +82,13 @@ export const Button = ({
 
   const Element: ElementType = href ? 'a' : 'button';
 
+  const additionalLinkProps = href
+    ? {
+        rel,
+        target,
+      }
+    : {};
+
   return (
     <Element
       onBlur={(e: FocusEvent) => {
@@ -96,6 +107,7 @@ export const Button = ({
       className={classNames}
       disabled={disabled}
       href={!disabled ? href : undefined}
+      {...additionalLinkProps}
       type={type}
       {...otherProps}
     >
